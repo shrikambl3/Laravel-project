@@ -76,7 +76,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Please login to use Message Wall
+                    Please login and Go to HOME page to use Message Wall
                 </div>
             </div>
         </div>
