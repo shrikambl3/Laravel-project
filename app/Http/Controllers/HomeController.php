@@ -63,8 +63,12 @@ class HomeController extends Controller
      */
     public function destroy(Request $request)
     {
-        foreach($request->input() as $delete)
-            WallModel::where('id',$delete)->delete();
-        return redirect('/home')->withSuccess('Message deleted!!');
+        if($request->input()) {
+            foreach ($request->input() as $delete)
+                WallModel::where('id', $delete)->delete();
+            return redirect('/home')->withSuccess('Message deleted!!');
+        } else {
+            return redirect('/home');
+        }
     }
 }
