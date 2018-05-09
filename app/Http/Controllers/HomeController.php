@@ -33,7 +33,6 @@ class HomeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -53,6 +52,19 @@ class HomeController extends Controller
         $wall->email = $request->input('email');
         $wall->message = $request->input('message');
         $wall->save();
-        return redirect('/home');
+        return redirect('/home')->withSuccess('Message Added!!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy(Request $request)
+    {
+        foreach($request->input() as $delete)
+            WallModel::where('id',$delete)->delete();
+        return redirect('/home')->withSuccess('Message deleted!!');
     }
 }

@@ -53,20 +53,28 @@
                         </ul>
                     </div>
                 @endif
+            @if (session('success'))
+                <!-- Form Error List -->
+                    <div class="alert alert-success">
+                        <strong>Success!!</strong>
+                        <br><br>
+                        {{session('success')}}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="container">
-
-    <div class="row">
-        {!! $posts->links() !!}
-
-        <table id="t01">
+        <form action="{{ url('delete') }}" method="GET" class="form-horizontal">
+            <div class="row">
+                {!! $posts->links() !!}
+                <table id="t01">
             <tr>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message Content(most recent first/paginated, 10 per page)</th>
+                <th>Delete</th>
             </tr>
             @if($posts)
                 @foreach($posts as $post)
@@ -74,13 +82,19 @@
                         <td> {{$post->name}}</td>
                         <td> {{$post->email}}</td>
                         <td> {{$post->message}}</td>
+                        <td> <input type="checkbox" name="list[{{$post->id}}]" value="{{$post->id}}"></td>
                     </tr>
                 @endforeach
             @endif
         </table>
-        {!! $posts->links() !!}
-    </div>
-
+                {!! $posts->links() !!}
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-default">
+                        Delete Message
+                    </button>
+                </div>
+            </div>
+        </form>
 </div>
 
 @endsection
