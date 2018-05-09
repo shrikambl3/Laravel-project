@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\WallModel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts =  WallModel::select("*")->orderBy('created_at','desc')->paginate(10);
+        return view('home',compact('posts'));
     }
 }
